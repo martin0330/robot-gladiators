@@ -7,6 +7,30 @@ var randomNumber = function(min, max) {
     return value;
 };
 
+var fightOrSkip = function() {
+    // ask player if they'd like to fight or skip using fightOrSkip function
+    var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
+
+    // Enter the conditional recursive function call here!
+    if (promptFight === "" || promptFight === null) {
+        window.alert("You need to provide a valid answer! Please try again. ")
+        return fightOrSkip();
+    }
+    // if player picks "skip" confirm and then stop the loop
+    if (promptFight === "skip" || promptFight === "SKIP") {
+      // confirm player wants to skip
+      var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+
+      // if yes (true), leave fight
+      if (confirmSkip) {
+        window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
+        // subtract money from playerMoney for skipping
+        playerInfo.playerMoney = playerInfo.money - 10;
+        shop();
+      }
+    }
+}
+
 // create function
 var fight = function(enemy) {
     // repeat and execute as long as the enemy-robot is alive 
@@ -123,7 +147,7 @@ var shop = function() {
     var shopOptionPrompt = window.prompt(
     'Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one "REFILL", "UPGRADE", or "LEAVE" to make a choice.'
     );
-  
+
     // use switch case to carry out action
     switch (shopOptionPrompt) {
       case 'REFILL':
@@ -148,6 +172,17 @@ var shop = function() {
         break;
     }
   };
+
+  var getPlayerName = function () {
+      var name = "" ; 
+
+      while (name === "" || name === null) {
+        name = prompt("What is your robot's name?");
+      }
+
+      console.log("Your robot's name is " + name);
+      return name;
+  }
 
   var playerInfo = {
     name: window.prompt("What is your robot's name?"),
