@@ -13,28 +13,36 @@ var fightOrSkip = function() {
 
     // Enter the conditional recursive function call here!
     if (promptFight === "" || promptFight === null) {
-        window.alert("You need to provide a valid answer! Please try again. ")
+        window.alert("You need to provide a valid answer! Please try again.");
         return fightOrSkip();
-    }
-    // if player picks "skip" confirm and then stop the loop
-    if (promptFight === "skip" || promptFight === "SKIP") {
-      // confirm player wants to skip
-      var confirmSkip = window.confirm("Are you sure you'd like to quit?");
-
-      // if yes (true), leave fight
-      if (confirmSkip) {
-        window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
-        // subtract money from playerMoney for skipping
-        playerInfo.playerMoney = playerInfo.money - 10;
-        shop();
       }
-    }
-}
+
+      promptFight = promptFight.toLowerCase();
+
+      if (promptFight === "skip") {
+        // confirm player wants to skip
+        var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+    
+        // if yes (true), leave fight
+        if (confirmSkip) {
+          window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
+          // subtract money from playerMoney for skipping, but don't let them go into the negative
+          playerInfo.money = Math.max(0, playerInfo.money - 10);
+          // stop while() loop using break; and enter next fight
+    
+          // return true if player wants to leave
+          return true;
+        }
+      }
+      return false;
+    };
 
 // create function
 var fight = function(enemy) {
     // repeat and execute as long as the enemy-robot is alive 
     while(playerInfo.health > 0 && enemy.health > 0) {
+        fightOrSkip; //replace code with this function call
+        var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
       // place fight function code block here . . .
 
     var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter FIGHT or SKIP to choose.");
@@ -185,7 +193,7 @@ var shop = function() {
   }
 
   var playerInfo = {
-    name: window.prompt("What is your robot's name?"),
+    name: getPlayerName(),
     health: 100,
     attack: 10,
     money: 10,
