@@ -240,8 +240,6 @@ var shop = function() {
     }
 },
 
-//console.log(playerName, playerAttack, playerHealth);
-
 var enemyInfo = [
     {
         name: "Roborto",
@@ -256,11 +254,6 @@ var enemyInfo = [
         attack: randomNumber(10,14)
     }
 ];
-
-console.log(enemyInfo);
-console.log(enemyInfo[0]);
-console.log(enemyInfo[0].name);
-console.log(enemyInfo[0]['attack']);
 
 
 startGame();
